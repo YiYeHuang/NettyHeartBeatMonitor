@@ -1,4 +1,4 @@
-package message;
+package servicemonitor.heartbeat.message;
 
 public class MessageType {
 	public static final char AUTH = 'A';
