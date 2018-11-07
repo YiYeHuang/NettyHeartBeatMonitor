@@ -27,4 +27,6 @@ repositories {
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	compile group: 'io.netty', name: 'netty-all', version: '5.0.0.Alpha1'
+	compile group: 'com.hazelcast', name: 'hazelcast', version: '3.10.6'
 }
