@@ -12,11 +12,15 @@ public class ClientEncoder extends MessageToByteEncoder<IMessage> {
 	@Override
 	protected void encode(ChannelHandlerContext channelHandlerContext, IMessage myMessage, ByteBuf byteBuf) {
 		char messageType = myMessage.getType();
-		int length = myMessage.getContentLength();
+		int serviceNameLength = myMessage.getServiceName().length();
+		int contentLength = myMessage.getContent().length();
+		String serviceName = myMessage.getServiceName();
 		String content = myMessage.getContent();
 
 		byteBuf.writeChar(messageType);
-		byteBuf.writeInt(length);
+		byteBuf.writeInt(serviceNameLength);
+		byteBuf.writeBytes(serviceName.getBytes(Charset.forName("UTF-8")));
+		byteBuf.writeInt(contentLength);
 		byteBuf.writeBytes(content.getBytes(Charset.forName("UTF-8")));
 	}
 }

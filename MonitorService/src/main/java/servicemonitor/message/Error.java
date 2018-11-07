@@ -19,8 +19,8 @@ public class Error implements IMessage {
 	}
 
 	@Override
-	public int getContentLength() {
-		return message.length();
+	public String getServiceName() {
+		return "ERROR";
 	}
 
 	@Override

@@ -1,79 +1,86 @@
 package message;
 
+import core.ServiceHeartBeatModule;
+
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HeartBeat implements IMessage {
-
-
 	private String ip;
-    private  serviceName;
 	private int port;
 	private Date lasttime;
-	private Map<String , String> cpuInfo = new HashMap<String,String>();
-	private Map<String , String> memInfo = new HashMap<String, String>();
+
+	private String totalMem;
+	private String freeMem;
+	private String usedMem;
+
+	private String sysCPU;
+	private String processedCPU;
+	private String processCPUTime;
 
 	private String content;
 
-	public HeartBeat(ServiceName) {
-        this.serviceName =
+	public HeartBeat() {
 	}
 
 	public HeartBeat(String content) {
 		this.content = content;
 	}
 
-	public String getIp() {
-		return ip;
-	}
-
 	public void setIp(String ip) {
 		this.ip = ip;
-	}
-
-	public int getPort() {
-		return port;
 	}
 
 	public void setPort(int port) {
 		this.port = port;
 	}
 
-	public Date getLasttime() {
-		return lasttime;
+	public void setProcessCPUTime(String processCPUTime) {
+		this.processCPUTime = processCPUTime;
+	}
+
+	public void setProcessedCPU(String processedCPU) {
+		this.processedCPU = processedCPU;
+	}
+
+	public void setTotalMem(String totalMem) {
+		this.totalMem = totalMem;
+	}
+
+	public void setFreeMem(String freeMem) {
+		this.freeMem = freeMem;
+	}
+
+	public void setUsedMem(String usedMem) {
+		this.usedMem = usedMem;
+	}
+
+	public void setSysCPU(String sysCPU) {
+		this.sysCPU = sysCPU;
+	}
+
+	public String getServiceName() {
+		return ServiceHeartBeatModule.SERVICENAME;
 	}
 
 	public void setLasttime(Date lasttime) {
 		this.lasttime = lasttime;
 	}
 
-	public Map<String, String> getCpuInfo() {
-		return cpuInfo;
-	}
-
-	public void setCpuInfo(Map<String, String> cpuInfo) {
-		this.cpuInfo = cpuInfo;
-	}
-
-	public Map<String, String> getMemInfo() {
-		return memInfo;
-	}
-
-	public void setMemInfo(Map<String, String> memInfo) {
-		this.memInfo = memInfo;
-	}
-
 	@Override
 	public String toString() {
 		 content =
-		 "HeartInfo{" +
-				"ip='" + ip + '\'' +
-				", port=" + port +
-				", lasttime=" + lasttime +
-				", cpuInfo=" + cpuInfo +
-				", memInfo=" + memInfo +
-				'}';
+		 "{\"service\" :" + '"' + ServiceHeartBeatModule.SERVICENAME + '"' + ","
+		+ "\"ip\" :" + '"' + ip + '"' + ","
+		+ "\"port\" :" + '"' + port + '"' + ","
+		+ "\"lastTime\" :" + '"' + lasttime + '"' + ","
+		+ "\"memory\" :{"
+		+ "\"total\" :" + '"' + totalMem + '"' + ","
+	    + "\"free\" :" + '"' + freeMem + '"' + ","
+		+ "\"used\" :" + '"' + usedMem + '"' + "},"
+		+ "\"cpu\" :{"
+		+ "\"system\" :" + '"' + sysCPU + '"' + ","
+		+ "\"processed\" :" + '"' + processedCPU + '"' + ","
+		+ "\"time\" :" + '"' + processCPUTime + '"' + "}}";
 		return content;
 	}
 
@@ -83,18 +90,23 @@ public class HeartBeat implements IMessage {
 	}
 
 	@Override
-	public int getContentLength() {
-		if (null == content) {
-			toString();
-		}
-		return toString().length();
-	}
-
-	@Override
 	public String getContent() {
 		if (null == content) {
 			toString();
 		}
 		return toString();
+	}
+
+	public static void main(String[] args) {
+		HeartBeat hb = new HeartBeat();
+		hb.setIp("192.168.1.2");
+		hb.setPort(1121);
+		hb.setTotalMem("4096");
+		hb.setUsedMem("1024");
+		hb.setFreeMem("2000");
+		hb.setSysCPU("100%");
+		hb.setProcessCPUTime("1234");
+		hb.setProcessedCPU("3%");
+		System.out.print(hb);
 	}
 }

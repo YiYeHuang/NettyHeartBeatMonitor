@@ -13,6 +13,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class ServiceHeartBeatModule {
 
+    public static String SERVICENAME = null;
+
     private EventLoopGroup clientGroup;
     private Bootstrap boot;
     private ChannelFuture ioc ;
@@ -21,10 +23,11 @@ public class ServiceHeartBeatModule {
     private final int port;
     private final int servicePort;
 
-    public ServiceHeartBeatModule(String host, int port, int servicePort) {
+    public ServiceHeartBeatModule(String host, int port, String serviceName, int servicePort) {
         this.host = host;
         this.port = port;
         this.servicePort = servicePort;
+        SERVICENAME = serviceName;
         init();
     }
 

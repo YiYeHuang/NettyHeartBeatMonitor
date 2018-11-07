@@ -2,8 +2,8 @@ package servicemonitor.nettyserver;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-import servicemonitor.message.HeartBeat;
 import servicemonitor.message.IMessage;
+import servicemonitor.message.Message;
 import servicemonitor.message.MessageType;
 
 import java.util.ArrayList;
@@ -13,11 +13,12 @@ import java.util.Map;
 
 public class MonitorHandler extends ChannelHandlerAdapter {
 
-    private Map<String, HeartBeat> heartInfoMap = new HashMap<String, HeartBeat>();
+    private Map<String, String> heartInfoMap = new HashMap<String, String>();
 
     private static final List<String> authList = new ArrayList<String>();
 
     static {
+
     }
 
     @Override
@@ -26,15 +27,16 @@ public class MonitorHandler extends ChannelHandlerAdapter {
         IMessage inbound = (IMessage) msg;
 
         if(((IMessage) msg).getType() == MessageType.AUTH){
-            ctx.writeAndFlush("OK");
+            ctx.writeAndFlush(new Message(MessageType.AUTH, ((IMessage) msg).getServiceName(), "200"));
         } else if(((IMessage) msg).getType() == MessageType.HEART_BEAT){
 
-            System.out.println((HeartBeat)msg);
+            System.out.println(((IMessage) msg).getContent());
 
             ctx.writeAndFlush("Get the Beep");
 
-            HeartBeat heartInfo = (HeartBeat)msg;
-            heartInfoMap.put(heartInfo.getIp() + ":" + heartInfo.getPort(),heartInfo);
+            heartInfoMap.put(((IMessage) msg).getServiceName(), ((IMessage) msg).getContent());
+            ctx.writeAndFlush(new Message(MessageType.HEART_BEAT,
+                    ((IMessage) msg).getServiceName(), "Heart Beat Received"));
         }
     }
 

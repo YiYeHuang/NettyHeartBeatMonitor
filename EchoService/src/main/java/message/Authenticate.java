@@ -1,5 +1,7 @@
 package message;
 
+import core.ServiceHeartBeatModule;
+
 public class Authenticate implements IMessage {
 
 	private final String ip;
@@ -33,8 +35,8 @@ public class Authenticate implements IMessage {
 	}
 
 	@Override
-	public int getContentLength() {
-		return toString().length();
+	public String getServiceName() {
+		return ServiceHeartBeatModule.SERVICENAME;
 	}
 
 	@Override

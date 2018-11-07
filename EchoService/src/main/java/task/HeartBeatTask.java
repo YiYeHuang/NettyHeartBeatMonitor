@@ -24,19 +24,17 @@ public class HeartBeatTask implements Runnable{
 	@Override
 	public void run() {
 		try{
-
 			OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 
-			heartInfo.getMemInfo().put("total",String.valueOf(osBean.getTotalPhysicalMemorySize()));
-			heartInfo.getMemInfo().put("free",String.valueOf(osBean.getFreePhysicalMemorySize()));
-			heartInfo.getMemInfo().put("used",String.valueOf(osBean.getCommittedVirtualMemorySize()));
+			heartInfo.setTotalMem(String.valueOf(osBean.getTotalPhysicalMemorySize()));
+			heartInfo.setFreeMem(String.valueOf(osBean.getFreePhysicalMemorySize()));
+			heartInfo.setUsedMem(String.valueOf(osBean.getCommittedVirtualMemorySize()));
 
-			heartInfo.getCpuInfo().put("sys",String.valueOf(osBean.getSystemCpuLoad()));
-			heartInfo.getCpuInfo().put("process",String.valueOf(osBean.getProcessCpuLoad()));
-			heartInfo.getCpuInfo().put("time",String.valueOf(osBean.getProcessCpuTime()));
+			heartInfo.setSysCPU(String.valueOf(osBean.getSystemCpuLoad()));
+			heartInfo.setProcessedCPU(String.valueOf(osBean.getProcessCpuLoad()));
+			heartInfo.setProcessCPUTime(String.valueOf(osBean.getProcessCpuTime()));
 
 			heartInfo.setLasttime(new Date());
-
 			ctx.writeAndFlush(heartInfo);
 
 		}catch (Exception e){

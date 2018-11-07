@@ -9,3 +9,4 @@ MonitorService/.gradle/buildOutputCleanup/cache.properties
 MonitorService/.gradle/vcsWorkingDirs/gc.properties
 OldIoImplementation/.gradle/buildOutputCleanup/cache.properties
 OldIoImplementation/.gradle/vcsWorkingDirs/gc.properties
+*.class

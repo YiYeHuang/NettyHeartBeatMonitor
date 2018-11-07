@@ -4,6 +4,8 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.ReferenceCountUtil;
 import message.Authenticate;
+import message.IMessage;
+import message.MessageType;
 import task.HeartBeatTask;
 
 import java.net.InetAddress;
@@ -19,7 +21,7 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
     private int port;
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> scheduledFuture;
-    private static final String SUCCESS = "OK";
+    private static final String SUCCESS = "200";
 
     public HeatBeatScheduler(int port) {
         this.port = port;
@@ -38,18 +40,23 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        if(msg instanceof String){
+        if(msg instanceof IMessage){
 
-            if(SUCCESS.equals((String)msg)){
+            if (((IMessage) msg).getType() == MessageType.AUTH) {
+                if(SUCCESS.equals(((IMessage) msg).getContent())) {
 
-                // Launching Scheduled heart Beat.
-                this.scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(
-                        new HeartBeatTask(ctx,ip,port),2,3,
-                        TimeUnit.SECONDS);
+                    // Launching Scheduled heart Beat.
+                    this.scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(
+                            new HeartBeatTask(ctx,ip,port),2,3,
+                            TimeUnit.SECONDS);
 
-            } else {
-                System.out.println("Server message: " + msg);
+                } else {
+                    System.out.println("Server message: " + msg);
+                }
+            } else if (((IMessage) msg).getType() == MessageType.HEART_BEAT) {
+                System.out.println("Server message: " + ((IMessage) msg).getContent());
             }
+
         }
         ReferenceCountUtil.release(msg);
     }
