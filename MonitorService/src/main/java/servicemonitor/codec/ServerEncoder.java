@@ -3,7 +3,7 @@ package servicemonitor.codec;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import message.IMessage;
+import servicemonitor.message.IMessage;
 
 import java.nio.charset.Charset;
 

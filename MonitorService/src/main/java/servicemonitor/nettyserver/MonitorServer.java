@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import servicemonitor.codec.ServerDecoder;
+import servicemonitor.codec.ServerEncoder;
 
 public class MonitorServer {
 
@@ -40,10 +42,10 @@ public class MonitorServer {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						public void initChannel(SocketChannel ch) {
-//							ch.pipeline()
-//									.addLast(new ServerDecoder())
-//									.addLast(new ServerEncoder())
-//									.addLast(new ServerMessageHandler());
+							ch.pipeline()
+									.addLast(new ServerDecoder())
+									.addLast(new ServerEncoder())
+									.addLast(new MonitorHandler());
 						}
 					})
 					.option(ChannelOption.SO_BACKLOG, 128)

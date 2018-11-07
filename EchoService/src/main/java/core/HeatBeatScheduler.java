@@ -50,9 +50,7 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
             } else {
                 System.out.println("Server message: " + msg);
             }
-
         }
-
         ReferenceCountUtil.release(msg);
     }
 

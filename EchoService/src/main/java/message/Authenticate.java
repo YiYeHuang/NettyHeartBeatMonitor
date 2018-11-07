@@ -11,6 +11,17 @@ public class Authenticate implements IMessage {
 		this.port = port;
 	}
 
+	public Authenticate(String content) {
+		String[] input = content.split(":");
+		if (input.length == 2) {
+			this.ip = input[0];
+			this.port = Integer.valueOf(input[1]);
+		} else {
+			ip = "127.0.0.1";
+			port = 1111;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return this.ip + ":" + this.port;

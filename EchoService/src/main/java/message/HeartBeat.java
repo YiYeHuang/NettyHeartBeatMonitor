@@ -5,15 +5,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HeartBeat implements IMessage {
+
+
 	private String ip;
-
+    private  serviceName;
 	private int port;
-
 	private Date lasttime;
-
 	private Map<String , String> cpuInfo = new HashMap<String,String>();
-
 	private Map<String , String> memInfo = new HashMap<String, String>();
+
+	private String content;
+
+	public HeartBeat(ServiceName) {
+        this.serviceName =
+	}
+
+	public HeartBeat(String content) {
+		this.content = content;
+	}
 
 	public String getIp() {
 		return ip;
@@ -57,13 +66,15 @@ public class HeartBeat implements IMessage {
 
 	@Override
 	public String toString() {
-		return "HeartInfo{" +
+		 content =
+		 "HeartInfo{" +
 				"ip='" + ip + '\'' +
 				", port=" + port +
 				", lasttime=" + lasttime +
 				", cpuInfo=" + cpuInfo +
 				", memInfo=" + memInfo +
 				'}';
+		return content;
 	}
 
 	@Override
@@ -73,11 +84,17 @@ public class HeartBeat implements IMessage {
 
 	@Override
 	public int getContentLength() {
+		if (null == content) {
+			toString();
+		}
 		return toString().length();
 	}
 
 	@Override
 	public String getContent() {
+		if (null == content) {
+			toString();
+		}
 		return toString();
 	}
 }
