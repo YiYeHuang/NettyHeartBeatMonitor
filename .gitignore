@@ -1,26 +1,11 @@
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+*.xml
 *.iml
-*.ipr
-/out/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+*.lock
+*.bin
+EchoService/.gradle/buildOutputCleanup/cache.properties
+EchoService/.gradle/vcsWorkingDirs/gc.properties
+MonitorService/.gradle/buildOutputCleanup/cache.properties
+MonitorService/.gradle/vcsWorkingDirs/gc.properties
+OldIoImplementation/.gradle/buildOutputCleanup/cache.properties
+OldIoImplementation/.gradle/vcsWorkingDirs/gc.properties
