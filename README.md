@@ -37,4 +37,4 @@ distributed environment. On the top, the access endpoint is represented using Sp
 - Launch the [monitor server](https://github.com/YiYeHuang/NettyHeartBeatMonitor/blob/master/MainServer/src/main/java/monitorservice/server/ServerApplication.java). This will start hazelcast -> netty -> Spring
 - Launch any numbers of [client service](https://github.com/YiYeHuang/NettyHeartBeatMonitor/blob/master/EchoService/src/main/java/ServiceLauncher.java) you want. 
 - access with localhost:8080/services for all current connected services
-- access with localhost:8080/monitor/<service name> for cpu and memory information
+- access with localhost:8080/monitor/${service name} for cpu and memory information
