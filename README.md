@@ -19,7 +19,7 @@ The result with astonishingly bad. However, I still got the phone call from the 
       client service -                                                                        | access   |
 
 This implementation also uses Netty framework to deal with the networking work and the non-blocking io. This free up the 
-threads and the resource to deal with more throughput. Hazelcast key value store is also used here for persistent in
+threads and the resource to deal with more throughput. [Hazelcast](https://github.com/hazelcast/hazelcast) key value store is also used here for persistent in
 distributed environment. On the top, the access endpoint is represented using Spring Boot framework.
 
 
