@@ -14,8 +14,9 @@ public class HeartBeatTask implements Runnable{
 
 	private HeartBeat heartInfo = new HeartBeat();
 
-	public HeartBeatTask(ChannelHandlerContext ctx, String ip, int port) {
+	public HeartBeatTask(ChannelHandlerContext ctx, String ip, int port, String serviceName) {
 		this.ctx = ctx;
+		this.heartInfo.setServiceName(serviceName);
 
 		heartInfo.setIp(ip);
 		heartInfo.setPort(port);

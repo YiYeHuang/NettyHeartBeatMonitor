@@ -13,7 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class ServiceHeartBeatModule {
 
-    public static String SERVICENAME = null;
+    public String SERVICENAME;
 
     private EventLoopGroup clientGroup;
     private Bootstrap boot;
@@ -29,6 +29,10 @@ public class ServiceHeartBeatModule {
         this.servicePort = servicePort;
         SERVICENAME = serviceName;
         init();
+    }
+
+    public String getServiceName() {
+        return SERVICENAME;
     }
 
     public void connect() {
@@ -69,7 +73,7 @@ public class ServiceHeartBeatModule {
                         ChannelPipeline pipe = ch.pipeline();
                         pipe.addLast(new ClientDecoder())
                             .addLast(new ClientEncoder())
-                            .addLast(new HeatBeatScheduler(servicePort));
+                            .addLast(new HeatBeatScheduler(servicePort, SERVICENAME));
                     }
                 });
     }

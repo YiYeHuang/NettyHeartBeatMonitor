@@ -8,8 +8,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import monitorservice.server.servicemonitor.apiImpl.MonitorHazelcaseStore;
 import monitorservice.server.servicemonitor.codec.ServerDecoder;
 import monitorservice.server.servicemonitor.codec.ServerEncoder;
+
+import com.hazelcast.core.HazelcastInstance;
 
 public class MonitorServer {
 
@@ -21,6 +24,8 @@ public class MonitorServer {
 	private static MonitorServer instance;
 
 	private MonitorServer() {
+		System.out.println("Starting Hazelcast Instance");
+		MonitorHazelcaseStore.getInstance();
 	}
 
 	public static synchronized MonitorServer getInstance() {

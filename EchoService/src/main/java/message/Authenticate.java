@@ -5,11 +5,12 @@ import core.ServiceHeartBeatModule;
 public class Authenticate implements IMessage {
 
 	private final String ip;
-
+	private String serviceName;
 	private final int port;
 
-	public Authenticate(String ip, int port) {
+	public Authenticate(String ip, int port, String serviceName) {
 		this.ip = ip;
+		this.serviceName = serviceName;
 		this.port = port;
 	}
 
@@ -36,7 +37,7 @@ public class Authenticate implements IMessage {
 
 	@Override
 	public String getServiceName() {
-		return ServiceHeartBeatModule.SERVICENAME;
+		return serviceName;
 	}
 
 	@Override

@@ -19,12 +19,14 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
 
     private String ip;
     private int port;
+    private String serviceName;
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> scheduledFuture;
     private static final String SUCCESS = "200";
 
-    public HeatBeatScheduler(int port) {
+    public HeatBeatScheduler(int port, String serviceName) {
         this.port = port;
+        this.serviceName = serviceName;
 
         try {
             this.ip = InetAddress.getLocalHost().getHostAddress();
@@ -35,7 +37,7 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(new Authenticate(ip, port));
+        ctx.writeAndFlush(new Authenticate(ip, port, serviceName));
     }
 
     @Override
@@ -47,7 +49,7 @@ public class HeatBeatScheduler extends ChannelHandlerAdapter {
 
                     // Launching Scheduled heart Beat.
                     this.scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(
-                            new HeartBeatTask(ctx,ip,port),2,3,
+                            new HeartBeatTask(ctx,ip,port, serviceName),2,3,
                             TimeUnit.SECONDS);
 
                 } else {

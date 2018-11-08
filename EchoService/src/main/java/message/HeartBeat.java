@@ -7,6 +7,7 @@ import java.util.Date;
 public class HeartBeat implements IMessage {
 	private String ip;
 	private int port;
+	private String serviceName;
 	private Date lasttime;
 
 	private String totalMem;
@@ -28,6 +29,10 @@ public class HeartBeat implements IMessage {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 	public void setPort(int port) {
@@ -59,7 +64,7 @@ public class HeartBeat implements IMessage {
 	}
 
 	public String getServiceName() {
-		return ServiceHeartBeatModule.SERVICENAME;
+		return serviceName;
 	}
 
 	public void setLasttime(Date lasttime) {
@@ -69,7 +74,7 @@ public class HeartBeat implements IMessage {
 	@Override
 	public String toString() {
 		 content =
-		 "{\"service\" :" + '"' + ServiceHeartBeatModule.SERVICENAME + '"' + ","
+		 "{\"service\" :" + '"' + serviceName + '"' + ","
 		+ "\"ip\" :" + '"' + ip + '"' + ","
 		+ "\"port\" :" + '"' + port + '"' + ","
 		+ "\"lastTime\" :" + '"' + lasttime + '"' + ","
