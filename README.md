@@ -1,5 +1,5 @@
 # NettyHeartBeatMonitor
-A Netty implementation to improve my original service heart beat monitor
+A Netty implementation to improve my original service heart beat monitor, added additional persistent storage using Hazelcast
 
 ## Intention
 The request was coming from a interview long time ago. At the time I was trying to solve the problem with out any framework.
