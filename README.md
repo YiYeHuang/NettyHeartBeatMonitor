@@ -12,11 +12,11 @@ The result with astonishingly bad. However, I still got the phone call from the 
 - Multi-threading ability is a joke
 
 ## New Implementation Structure
-      client service -                                                                        | spring   | 
-                      |                               --------------                          | boot     |
-      client service  |>--- schedule heart beat ---> | Netty Server |--> | Hazelcast Store|> -| rest     | <----user
-                      |                               --------------                          | endpoint |
-      client service -                                                                        | access   |
+      dummy service -                                                                          | spring   | 
+                      |                                --------------                          | boot     |
+      dummy service   |>--- scheduled heart beat ---> | Netty Server |--> | Hazelcast Store|> -| rest     | <----user
+                      |                                --------------                          | endpoint |
+      dummy service -                                                                          | access   |
 
 This implementation also uses Netty framework to deal with the networking work and the non-blocking io. This free up the 
 threads and the resource to deal with more throughput. [Hazelcast](https://github.com/hazelcast/hazelcast) key value store is also used here for persistent in
